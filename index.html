@@ -1,23 +1,73 @@
-<!-- <div>
-  <div onclick="console.log('first div')">
-    <div onclick="console.log('second div')">
-      <button onclick="console.log('button')">Click!</button>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Closure Practical Example</title>
+    <style>
+      .container {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      button {
+        background: black;
+        color: chartreuse;
+        border: none;
+        padding: 7px 11px;
+        border-radius: 2px;
+        margin: 10px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #212121;
+      }
+    </style>
+  </head>
+  <body style="background-color: #313131">
+    <div class="container">
+      <button id="violet">Violet</button>
+      <button id="indigo">Indigo</button>
+      <button id="blue">Blue</button>
+      <button id="green">Green</button>
+      <button id="yellow">Yellow</button>
+      <button id="orange">Orange</button>
+      <button id="red">Red</button>
     </div>
-  </div>
-</div> -->
+  </body>
+  <script>
+    // Suppose we have to apply the below functionality to 100 buttons, we have to create a function for changing the color.
 
-<!-- <div>
-  <div onclick="alert('first div')">
-    <div onclick="alert('second div')">
-      <button onclick="alert('button')">Click!</button>
-    </div>
-  </div>
-</div> -->
+    // document.getElementById("grey").onclick = function () {
+    //   document.body.style.backgroundColor = "grey";
+    // };
+    // document.getElementById("blue").onclick = function () {
+    //   document.body.style.backgroundColor = "blue";
+    // };
 
-<!-- 
-    button
-    second div
-    first div
+    // We can implement the above as shown below, but that is not going to work
+    // function clickHandler(color) {
+    //   document.body.style.backgroundColor = color;
+    // }
 
-    "Event Bubbling"
- -->
+    // document.getElementById("grey").onclick = clickHandler("grey");
+    // document.getElementById("blue").onclick = clickHandler("blue");
+
+    // The solution for above problem is to use closure
+
+    function changeColor(color) {
+      return function () {
+        document.body.style.backgroundColor = `${color}`;
+      };
+    }
+
+    document.getElementById("violet").onclick = changeColor("violet");
+    document.getElementById("indigo").onclick = changeColor("indigo");
+    document.getElementById("blue").onclick = changeColor("blue");
+    document.getElementById("green").onclick = changeColor("green");
+    document.getElementById("yellow").onclick = changeColor("yellow");
+    document.getElementById("orange").onclick = changeColor("orange");
+    document.getElementById("red").onclick = changeColor("red");
+  </script>
+</html>
